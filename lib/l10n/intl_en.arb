@@ -1,0 +1,21 @@
+{
+  "listOfWorkout": "List Of Workouts",
+  "Programs": "Programs",
+  "Settings": "Settings",
+  "AppBarRegistrationText": "Регистрация",
+  "HintNameOfRegistrationForm": "Введите Ваше имя",
+  "LogInBTN": "Войти",
+  "BackBTN": "Назад",
+  "RegistrationBTN": "Регистрация",
+  "LogInTextField": "Email",
+"LoginRegistratuonHintText": "Придумайте логин для входа",
+  "LoginHintText": "Логин для входа Ваш email",
+  "PasswordTextField": "Пароль",
+  "PasswordHintText": "Введите Пароль",
+  "PasswordRepeatHintText": "Повторите пароль",
+  "EmailTextField": "Email",
+  "EmailHintText": "Введите Ваш Email",
+  "PasswordHintText": "Введите пароль",
+  "AddNewProgramText": "Добавление новой программы",
+  "AddNameOfProgramHint": "Добавление новой программы"
+}

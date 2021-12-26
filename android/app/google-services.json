@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "475457922747",
+    "project_id": "workout-day-d60f3",
+    "storage_bucket": "workout-day-d60f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:475457922747:android:a9c45f92e25026de1f6b9e",
+        "android_client_info": {
+          "package_name": "com.workout.workoutday"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "475457922747-fvek84i3jgl0agdi3pe9bg9gc78tbtm6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD75PvQ4XfgU_GcLFhHQ1DMZR6Nz5eIjPc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "475457922747-fvek84i3jgl0agdi3pe9bg9gc78tbtm6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
