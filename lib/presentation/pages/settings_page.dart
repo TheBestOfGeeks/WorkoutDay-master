@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
-import 'package:workoutday/data/auth_service.dart';
+import 'package:workoutday/data/services/auth_service.dart';
 
 class SettingsPage extends StatelessWidget {
 

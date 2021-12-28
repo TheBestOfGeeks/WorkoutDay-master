@@ -4,11 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
-import 'package:workoutday/data/channge_notifier.dart';
+import 'package:workoutday/data/services/change_notifier_service.dart';
 import 'package:workoutday/domain/entities/the_user.dart';
-import 'package:workoutday/presentation/login_page.dart';
-import 'package:workoutday/presentation/navigation_bar_page.dart';
-import 'package:workoutday/data/auth_service.dart';
+import 'package:workoutday/presentation/features/theme.dart';
+import 'package:workoutday/presentation/pages/login_page.dart';
+import 'package:workoutday/presentation/pages/navigation_bar_page.dart';
+import 'package:workoutday/data/services/auth_service.dart';
 import 'generated/l10n.dart';
 
 
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
       lazy: false,
       value: AuthService().user,
       initialData: null,
-      child: CupertinoApp(
+      child: MaterialApp(
+        theme: basicTheme(),
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,
@@ -46,7 +48,7 @@ class MainScreen extends StatelessWidget {
     if (current_user == null) {
       return LoginPage();
     }  else {
-      return ChangeNotifierProvider<DataChangeNotifier>(create: (context) => DataChangeNotifier(),
+      return ChangeNotifierProvider<DataChangeNotifierService>(create: (context) => DataChangeNotifierService(),
      child: NavigationBar(),
     );
     }

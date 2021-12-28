@@ -2,12 +2,12 @@
 
 import 'package:workoutday/domain/repository/add_program_repository.dart';
 
-class SaveProgram {
+class AddProgramUseCase {
 
   final AddProgramRepository addProgramRepository;
 
-  SaveProgram(this.addProgramRepository);
-
+  AddProgramUseCase(this.addProgramRepository);
+// сохраняет программу в бд, в методе реализована проверка по имени на уже существующую запись
  bool saveProgWithCheckDoubleName(nameOfProgram, programs, databaseService) {
    bool _doubleName = false;
    for (var exOfProgram in programs)
@@ -20,7 +20,7 @@ class SaveProgram {
     }
     return _doubleName;
  }
-
+//удаляет программу из бд по id
  deleteDocument(idOfProgram) {
    addProgramRepository.delete(idOfProgram);
  }

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-  class DataChangeNotifier with ChangeNotifier {
+  class DataChangeNotifierService with ChangeNotifier {
    String _dataIdOfExercise = 'error';
    String get getData => _dataIdOfExercise;
 

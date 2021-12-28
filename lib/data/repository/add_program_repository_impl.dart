@@ -1,7 +1,7 @@
 
 
 
-import 'package:workoutday/data/database_service.dart';
+import 'package:workoutday/data/services/firestore_service.dart';
 import 'package:workoutday/domain/repository/add_program_repository.dart';
 
 class AddProgramRepositoryImpl implements AddProgramRepository {

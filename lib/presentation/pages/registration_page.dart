@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workoutday/presentation/features/text_field_style.dart';
 import 'package:workoutday/generated/l10n.dart';
-import 'package:workoutday/data/auth_service.dart';
+import 'package:workoutday/data/services/auth_service.dart';
 
 class RegistrationPage extends StatefulWidget {
   @override
