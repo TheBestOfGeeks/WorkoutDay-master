@@ -10,16 +10,14 @@ import '../../data/services/change_notifier_service.dart';
 
 final AddProgramRepositoryImpl addProgramRepositoryImpl = AddProgramRepositoryImpl();
 
-class ProgramsTile extends StatelessWidget {
+class ProgramTile extends StatelessWidget {
 
 
-  late final TheProgram theProgram;
-  ProgramsTile(this.theProgram);
+  final TheProgram theProgram;
+  ProgramTile(this.theProgram);
   AddProgramUseCase saveProgram = AddProgramUseCase(addProgramRepositoryImpl);
   @override
   Widget build(BuildContext context) {
-
-
 
 
     void _programSettingPanel() {
@@ -31,28 +29,26 @@ class ProgramsTile extends StatelessWidget {
       );
     }
 
-
     return Padding(
-      padding: EdgeInsets.only(top: 5.0),
+      padding: EdgeInsets.only(top: 8.0),
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15))),
-        //margin: EdgeInsets.fromLTRB(20.0, 6.0, 20.0, 0.0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+        margin: EdgeInsets.fromLTRB(20.0, 1.0, 20.0, 0.0),
             child: ListTile(
               onTap: ((){
-                context.read<DataChangeNotifierService>().changeIdOfExercise(theProgram.id!);
+                context.read<DataChangeNotifierService>().changeIdOfExercise(theProgram.id);
                 _programSettingPanel();
               }) ,
               leading: CircleAvatar(
                 radius: 15.0,
               ),
-              title: Text(theProgram.name as String, style: TextStyle(color: Colors.white),),
-              trailing: IconButton(icon: Icon(Icons.delete, color: Colors.red,), onPressed: (){ saveProgram.deleteDocument(theProgram.id!); },),
+              title: Text(theProgram.name as String),
+              trailing: IconButton(icon: Icon(Icons.delete, color: Colors.red,), onPressed: (){ saveProgram.deleteDocument(theProgram.id); },),
             ),
 
       )
     );
   }
-
 
 }
 

@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:workoutday/data/services/auth_service.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -10,16 +11,21 @@ class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Row(
-        children: [
-          CupertinoButton(child: Text('Выйти'),
-              onPressed: (() async {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Настройки'),
+      ),
+      body: Row(
+          children: [
+            CupertinoButton(child: Text('Выйти'),
+                onPressed: (() async {
 await _auth.logOutUser();
-              }
-              )
-          ),
-        ]
+                }
+                )
+            ),
+          ]
 
+      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutday/domain/entities/the_exercise.dart';
 import 'package:workoutday/domain/entities/the_program.dart';
+import 'package:workoutday/domain/entities/the_workout.dart';
 
 
 
@@ -12,8 +13,9 @@ class DatabaseService {
   final String? uid;
   String? programId = '';
 
-  final CollectionReference userCollection = FirebaseFirestore.instance.collection('userData');
-  final CollectionReference programsCollection = FirebaseFirestore.instance.collection('userData').doc(_auth.currentUser!.uid.toString()).collection('programs');
+  final CollectionReference _userCollection = FirebaseFirestore.instance.collection('userData');
+  final CollectionReference _programsCollection = FirebaseFirestore.instance.collection('userData').doc(_auth.currentUser!.uid.toString()).collection('programs');
+  final CollectionReference _workoutCollection = FirebaseFirestore.instance.collection('userData').doc(_auth.currentUser!.uid.toString()).collection('workouts');
         CollectionReference exercisesCollection(){
     final CollectionReference _exercisesCollection = FirebaseFirestore.instance.collection('userData').doc(_auth.currentUser!.uid.toString()).collection('programs')
         .doc(programId).collection('exercises');
@@ -28,7 +30,7 @@ class DatabaseService {
 
 
 Future updateUserData(String userEmail) async {
-  return await userCollection.doc(uid).set({
+  return await _userCollection.doc(uid).set({
     'userEmail': userEmail,
   });
 }
@@ -39,6 +41,13 @@ List<TheProgram> listOfPrograms(QuerySnapshot snapshot) {
   }).toList();
 }
 
+List<TheWorkout> listOfWorkouts(QuerySnapshot snapshot) {
+  return snapshot.docs.map((doc) {
+    return TheWorkout(name: doc.get('name') ?? 'Error name', date: doc.get('date'), isDone: doc.get('isDone'));
+  }).toList();
+}
+
+
 // Возвращает из БД список упражнений
   List<TheExercise> listOfExercise(QuerySnapshot snapshot) {
   return snapshot.docs.map((doc) {
@@ -48,7 +57,7 @@ List<TheProgram> listOfPrograms(QuerySnapshot snapshot) {
 
  //getter стрима, возвращает лист с текущими программами из бд
 Stream<List<TheProgram>> get programs  {
-  return programsCollection.snapshots()
+  return _programsCollection.snapshots()
       .map((listOfPrograms));
 }
 //getter стрима, возвращает лист с текущими упражнениями из бд
@@ -58,13 +67,13 @@ Stream<List<TheProgram>> get programs  {
   }
 // Добавление программы в БД
   Future addProgram(String nameOfProgram) async{
-return await programsCollection.doc().set({
+return await _programsCollection.doc().set({
   'name': nameOfProgram,
 });
   }
   // Удаление программы из БД
   Future deleteProgram(String idOfProgram) async {
-   return await programsCollection.doc(idOfProgram).delete();
+   return await _programsCollection.doc(idOfProgram).delete();
   }
 
 // Добавление упражнения в БД
@@ -73,7 +82,23 @@ return await programsCollection.doc().set({
       {
         'name': nameOfExercise,
       });
-
   }
 
+  // Добавление тренировки в БД
+  Future addWorkout(nameOfWorkout, dateOfWorkout, bool isDone) async{
+    return await _workoutCollection.doc().set({
+      'name': nameOfWorkout,
+      'date': dateOfWorkout,
+      'isDone': isDone,
+    });
+  }
+  // //getter стрима, возвращает лист с текущими тренировками из бд
+  Stream<List<TheWorkout>> get workouts {
+    return _workoutCollection.snapshots()
+        .map((listOfWorkouts));
+  }
+  // Удаление тренировки из БД
+  Future deleteWorkout(String idOfWorkout) async {
+    return await _programsCollection.doc(idOfWorkout).delete();
+  }
 }

@@ -17,7 +17,7 @@ AddExerciseUseCase(this.addExerciseRepository);
     for (var exOfProgram in _programs) {
       if (exOfProgram.name == _nameOfProgram) {
         _idOfProgram = exOfProgram.id!;
-        addExerciseRepository.save(_nameOfExercise, _idOfProgram);
+        addExerciseRepository.save(_nameOfExercise, _idOfProgram,);
         _saveOrNotExercise = true;
         break;
       }

@@ -6,16 +6,16 @@ import 'package:workoutday/domain/repository/add_program_repository.dart';
 
 class AddProgramRepositoryImpl implements AddProgramRepository {
 
-  DatabaseService databaseService = DatabaseService();
+  DatabaseService _databaseService = DatabaseService();
 
   @override
   delete(idOfProgram) {
-    databaseService.deleteProgram(idOfProgram);
+    _databaseService.deleteProgram(idOfProgram);
   }
 
   @override
   save(_nameOfProgram) {
-    databaseService.addProgram(_nameOfProgram);
+    _databaseService.addProgram(_nameOfProgram);
   }
 
 }

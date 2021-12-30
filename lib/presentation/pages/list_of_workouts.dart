@@ -1,32 +1,34 @@
 
 
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
-import 'package:workoutday/domain/entities/the_program.dart';
+import 'package:workoutday/domain/entities/the_workout.dart';
 import 'package:workoutday/presentation/models/programs_tile.dart';
+import 'package:workoutday/presentation/models/workout_tale.dart';
 
 
 
-class ListOfPrograms extends StatefulWidget {
+class ListOfWorkouts extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-return ListOfProgramsState();
+    return ListOfWorkoutsState();
   }
 }
 
-class ListOfProgramsState extends State<ListOfPrograms> {
+class ListOfWorkoutsState extends State<ListOfWorkouts> {
 
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
 
-    final programs  = Provider.of<List<TheProgram>?>(context) ?? [];
+    final workouts  = Provider.of<List<TheWorkout>?>(context) ?? [];
     return
       AnimationLimiter(
         child: ListView.builder(
           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          itemCount: programs.length,
+          itemCount: workouts.length,
           itemBuilder: (context, index) {
             return AnimationConfiguration.staggeredList(
               position: index,
@@ -38,7 +40,7 @@ class ListOfProgramsState extends State<ListOfPrograms> {
                   curve: Curves.fastLinearToSlowEaseIn,
                   horizontalOffset: -300,
                   verticalOffset: -850,
-                  child: ProgramTile(programs[index]),
+                  child: WorkoutTale(workouts[index]),
                 ),
               ),
             );

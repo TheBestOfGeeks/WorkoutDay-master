@@ -1,8 +1,8 @@
 
 
 class TheProgram {
-  late final String? name;
-  late final String? id;
+  final String name;
+  final String id;
 
-  TheProgram({this.name, this.id});
+  TheProgram({required this.name, required this.id});
 }

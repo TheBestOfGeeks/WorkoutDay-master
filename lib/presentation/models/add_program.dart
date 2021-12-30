@@ -14,7 +14,7 @@ import 'package:workoutday/data/services/firestore_service.dart';
 
 
 class AddProgram extends StatefulWidget {
-bool isCreatedd;
+final bool isCreatedd;
 
   AddProgram(this.isCreatedd);
   @override
@@ -55,7 +55,7 @@ class _AddProgramState extends State<AddProgram> {
               margin: EdgeInsets.only(bottom: 20),
               decoration: const BoxDecoration(
               borderRadius: BorderRadius.vertical(top: Radius.circular(40), bottom: Radius.circular(40)),
-                color: Color.fromRGBO(153,153,153, 1),
+                color: Colors.black38,
             ),
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
               child: Form(
@@ -134,7 +134,7 @@ class _AddProgramState extends State<AddProgram> {
   Widget createOrModify(programs) {
     if (isCreated) {
       TheProgram theProgram = programs.firstWhere((element) => element.id == context.watch<DataChangeNotifierService>().getData);
-      _nameOfProgram = theProgram.name!;
+      _nameOfProgram = theProgram.name;
       return Text(_nameOfProgram, style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),);
     } else {
 return TextFormField(

@@ -11,12 +11,14 @@ class ProgramsPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Программы тренировок'),
+      ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
         floatingActionButton: CustomFloatingActionButton(AddProgram(false), 'Добавить программу'),
-        body: ListOfProgramsPage(),
+        body: ListOfPrograms(),
       );
 
   }
 }
-
 

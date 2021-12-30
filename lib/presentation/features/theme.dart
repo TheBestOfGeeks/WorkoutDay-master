@@ -10,7 +10,7 @@ ThemeData basicTheme() {
 
   return ThemeData(
 scaffoldBackgroundColor: Colors.white,
-cardColor: Color.fromRGBO(153,153,153, 0.1),
+cardColor: Color.fromRGBO(238,238,238, 1),
 
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       extendedTextStyle: TextStyle(color: Colors.white24, fontWeight: FontWeight.bold),
@@ -18,7 +18,7 @@ cardColor: Color.fromRGBO(153,153,153, 0.1),
       focusColor: Colors.black
     ),
 
-      textTheme: TextTheme(
+/*      textTheme: TextTheme(
         headline1: TextStyle(color: Colors.white),
         headline2: TextStyle(color: Colors.white),
         headline3: TextStyle(color: Colors.white),
@@ -27,7 +27,18 @@ cardColor: Color.fromRGBO(153,153,153, 0.1),
         headline6: TextStyle(color: Colors.white),
         bodyText1: TextStyle(color: Colors.white),
         bodyText2: TextStyle(color: Colors.white),
-      )
+      ),*/
+
+    appBarTheme: AppBarTheme(
+      backgroundColor: Color.fromRGBO(153,153,153, 1),
+      centerTitle: true,
+    ),
+
+
+
+
+
+
 
 
 );
