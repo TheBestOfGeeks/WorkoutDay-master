@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workoutday/core/data/auth_service.dart';
+import 'package:workoutday/generated/l10n.dart';
 
 class SettingsPage extends StatelessWidget {
 // TODO Убрать сервис подключения напрямую
@@ -13,16 +14,22 @@ class SettingsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Настройки'),
+        title: Text(S.of(context).Settings),
       ),
       body: Row(
+        verticalDirection: VerticalDirection.down,
+        crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            CupertinoButton(child: Text('Выйти'),
-                onPressed: (() async {
+              CupertinoButton(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  color: Colors.blue,
+                  child: Text(S.of(context).Exit),
+                  onPressed: (() async {
 await _auth.logOutUser();
-                }
-                )
-            ),
+                  }
+                  )
+              ),
+
           ]
 
       ),

@@ -46,7 +46,7 @@ class AuthService {
           email: email, password: password);
       User? user = result.user;
       // добавление в бд записи с программами тренировок с уникальным id пользователя
-      await DatabaseService.user(uid: user!.uid).updateUserData(email);
+      await DatabaseService.user(uid: user!.uid).updateUserData(userEmail: email);
       return _userFromFireBAseUser(user);
     } catch (e) {
       print('Вот она ошибка $e');
@@ -57,11 +57,10 @@ class AuthService {
 //метод авторизации пользователя по email и паролю
   Future logInByEmailAndLogin(String email, String password) async {
     try {
-      UserCredential result = await _auth.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      User? user = result.user;
     } on Exception catch (e) {
-      print('Вот она ошибка $e');
+      print(e);
       return null;
     }
   }

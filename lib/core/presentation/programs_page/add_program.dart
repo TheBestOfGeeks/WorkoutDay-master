@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workoutday/core/data/repository/add_exercise_repository_impl.dart';
 import 'package:workoutday/core/data/repository/add_program_repository_impl.dart';
-import 'package:workoutday/core/domain/change_notifiers/change_notifier_hideFloatingButton.dart';
 import 'package:workoutday/core/domain/entities/entities/the_program.dart';
 import 'package:workoutday/core/domain/use_cases/add_exercise_usecase.dart';
 import 'package:workoutday/core/domain/use_cases/add_program_usecase.dart';
 import 'package:workoutday/core/presentation/features/text_field_style.dart';
+import 'package:workoutday/generated/l10n.dart';
 
 
 
@@ -30,7 +29,6 @@ class _AddProgramState extends State<AddProgram> {
   _AddProgramState();
 
   String _nameOfProgram = '';
-  String _nameOfExercise = '';
   AddProgramUseCase saveProgram = AddProgramUseCase(addProgramRepositoryImpl);
   AddExerciseUseCase saveExercise = AddExerciseUseCase(addExerciseRepositoryImpl);
   final _formKey = GlobalKey<FormState>();
@@ -67,14 +65,14 @@ class _AddProgramState extends State<AddProgram> {
                     //вызов метода ввода названия программы или её отображения.
                     TextFormField(
                     validator: (val) =>
-                val!.isEmpty ? 'Введите имя программы' : null,
+                val!.isEmpty ? S.of(context).EnterProgramName : null,
                 onChanged: (programName) {
                   setState(() {
                     _nameOfProgram = programName;
                   });
                 },
                 style: TextStyle(height: 0.5),
-                decoration: TextFieldStyle('Имя программы', 'Введите имя программы', Icon(Icons.add_circle_rounded)).style(),
+                decoration: TextFieldStyle(S.of(context).ProgramName, S.of(context).EnterProgramName, Icon(Icons.add_circle_rounded)).style(),
                 keyboardType: TextInputType.text,
               ),
                     Text(
@@ -84,60 +82,19 @@ class _AddProgramState extends State<AddProgram> {
                     ),
               CupertinoButton(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: Colors.black,
-                child: Text('Сохранить программу',
+                color: Colors.blue,
+                child: Text(S.of(context).SaveProgram,
                     style: TextStyle(fontSize: 13)),
                 onPressed: () => {
                   if (_formKey.currentState!.validate()) {
                     if (saveProgram.saveProgWithCheckDoubleName(_nameOfProgram, _programs)){
-                      setState(() => _errorName = 'Программа с таким именем уже существует')
+                      setState(() => _errorName = S.of(context).NameOfProgramExist)
                     } else {
                       setState(() => _errorName = '')
                     }
                   }
                 },
               ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: TextFormField(
-                            onChanged: (exerciseName) {
-                              setState(() {
-                                _nameOfExercise = exerciseName;
-                              });
-                            },
-                            style: TextStyle(
-                              height: 0.5,
-                            ),
-                            decoration: TextFieldStyle('Упражнение', 'Название упражнения', Icon(Icons.add)).style(),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: IconButton(
-                            onPressed: () {
-                              bool addOrNot = false;
-                              addOrNot = saveExercise.addExercise(_nameOfExercise, _programs, _nameOfProgram);
-                              if (addOrNot) {
-                                _errorName = '';
-                              } else {
-                                _errorName = 'Сначала сохраните программу';
-                              }
-                              setState(() {});
-                            },
-                            icon: Icon(
-                              Icons.add_task,
-                              size: 40,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                     SizedBox(
                       height: 20,
                     ),

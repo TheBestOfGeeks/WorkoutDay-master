@@ -22,32 +22,67 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Add": MessageLookupByLibrary.simpleMessage("Добавить"),
+        "AddExercise":
+            MessageLookupByLibrary.simpleMessage("Добавить упражнение"),
         "AddNameOfProgramHint":
             MessageLookupByLibrary.simpleMessage("Добавление новой программы"),
         "AddNewProgramText":
             MessageLookupByLibrary.simpleMessage("Добавление новой программы"),
+        "AddProgram":
+            MessageLookupByLibrary.simpleMessage("Добавить программу"),
+        "AddRepetitions":
+            MessageLookupByLibrary.simpleMessage("Заполните повторения!"),
+        "AddWeight": MessageLookupByLibrary.simpleMessage("Заполните вес!"),
+        "AnonEnter": MessageLookupByLibrary.simpleMessage("Войти анонимно"),
         "AppBarRegistrationText":
             MessageLookupByLibrary.simpleMessage("Регистрация"),
+        "Authorization": MessageLookupByLibrary.simpleMessage("Авторизация"),
         "BackBTN": MessageLookupByLibrary.simpleMessage("Назад"),
+        "CheckIfTheInputDataIsRight": MessageLookupByLibrary.simpleMessage(
+            "Проверьте правильность введённых данных"),
         "EmailHintText":
             MessageLookupByLibrary.simpleMessage("Введите Ваш Email"),
         "EmailTextField": MessageLookupByLibrary.simpleMessage("Email"),
+        "EnterProgramName":
+            MessageLookupByLibrary.simpleMessage("Введите имя программы"),
+        "ErrorLoginOrPassword":
+            MessageLookupByLibrary.simpleMessage("Неверный логин или пароль"),
+        "Exercise": MessageLookupByLibrary.simpleMessage("Упражнение"),
+        "Exit": MessageLookupByLibrary.simpleMessage("Выйти"),
+        "FirstSaveTheProgram":
+            MessageLookupByLibrary.simpleMessage("Сначала сохраните программу"),
         "HintNameOfRegistrationForm":
             MessageLookupByLibrary.simpleMessage("Введите Ваше имя"),
         "LogInBTN": MessageLookupByLibrary.simpleMessage("Войти"),
         "LogInTextField": MessageLookupByLibrary.simpleMessage("Email"),
         "LoginHintText":
             MessageLookupByLibrary.simpleMessage("Логин для входа Ваш email"),
-        "LoginRegistratuonHintText":
+        "LoginRegistrationHintText":
             MessageLookupByLibrary.simpleMessage("Придумайте логин для входа"),
+        "NameOfExercise":
+            MessageLookupByLibrary.simpleMessage("Название упражнения"),
+        "NameOfProgramExist": MessageLookupByLibrary.simpleMessage(
+            "Программа с таким именем уже существует"),
+        "NoOneTrainingIsFound": MessageLookupByLibrary.simpleMessage(
+            "Не добавлено ни одной тренировки"),
         "PasswordHintText":
-            MessageLookupByLibrary.simpleMessage("Введите пароль"),
+            MessageLookupByLibrary.simpleMessage("Введите Пароль"),
         "PasswordRepeatHintText":
             MessageLookupByLibrary.simpleMessage("Повторите пароль"),
         "PasswordTextField": MessageLookupByLibrary.simpleMessage("Пароль"),
-        "Programs": MessageLookupByLibrary.simpleMessage("Programs"),
+        "ProgramName": MessageLookupByLibrary.simpleMessage("Имя программы"),
+        "Programs":
+            MessageLookupByLibrary.simpleMessage("Программы тренировок"),
         "RegistrationBTN": MessageLookupByLibrary.simpleMessage("Регистрация"),
-        "Settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "Repetitions": MessageLookupByLibrary.simpleMessage("Повторы"),
+        "SaveProgram":
+            MessageLookupByLibrary.simpleMessage("Сохранить программу"),
+        "Settings": MessageLookupByLibrary.simpleMessage("Настройки"),
+        "StartTraining":
+            MessageLookupByLibrary.simpleMessage("Начать тренировку"),
+        "Trainings": MessageLookupByLibrary.simpleMessage("Тренировки"),
+        "Weight": MessageLookupByLibrary.simpleMessage("Вес"),
         "listOfWorkout":
             MessageLookupByLibrary.simpleMessage("List Of Workouts")
       };

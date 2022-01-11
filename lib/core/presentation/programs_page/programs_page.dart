@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workoutday/core/domain/change_notifiers/change_notifier_hideFloatingButton.dart';
 import 'package:workoutday/core/presentation/features/custom_floating_action_button.dart';
-
-
 import 'add_program.dart';
 import 'list_of_programs.dart';
+import 'package:workoutday/generated/l10n.dart';
 
 class ProgramsPage extends StatefulWidget {
 
@@ -22,10 +21,10 @@ class _ProgramsPageState extends State<ProgramsPage> {
     bool _hideFloatingButton = context.watch<ChangeNotifierHideFloatingButton>().getHideOrNotButton;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Программы тренировок'),
+        title: Text(S.of(context).Programs),
       ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: _hideFloatingButton ? Container() : CustomFloatingActionButton(AddProgram(), 'Добавить программу') ,
+        floatingActionButton: _hideFloatingButton ? Container() : CustomFloatingActionButton(AddProgram(), S.of(context).AddProgram) ,
         body: ListOfPrograms(),
       );
 

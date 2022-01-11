@@ -1,6 +1,7 @@
 
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 
@@ -40,12 +41,8 @@ cardColor: Color.fromRGBO(238,238,238, 1),
       centerTitle: true,
     ),
 
-
-
-
-
-
-
-
+    buttonTheme: ButtonThemeData(
+      buttonColor: Colors.blue,
+    )
 );
 }

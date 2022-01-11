@@ -11,7 +11,7 @@ import 'package:workoutday/core/domain/use_cases/add_exercise_usecase.dart';
 import 'package:workoutday/core/presentation/features/text_field_style.dart';
 import 'package:workoutday/core/presentation/programs_page/exercise_tile.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-
+import 'package:workoutday/generated/l10n.dart';
 
 
 class UpdateProgram extends StatefulWidget {
@@ -93,7 +93,7 @@ class _UpdateProgramState extends State<UpdateProgram> {
                             style: TextStyle(
                               height: 0.5,
                             ),
-                            decoration: TextFieldStyle('Упражнение', 'Название упражнения', Icon(Icons.add)).style(),
+                            decoration: TextFieldStyle(S.of(context).Exercise, S.of(context).NameOfExercise, Icon(Icons.add)).style(),
                           ),
                         ),
                         Expanded(
@@ -101,11 +101,11 @@ class _UpdateProgramState extends State<UpdateProgram> {
                           child: IconButton(
                             onPressed: () {
                               bool addOrNot = false;
-                              addOrNot = saveExercise.addExercise(_nameOfExercise, _programs, _nameOfProgram);
+                              addOrNot = saveExercise.addExercise(nameOfExercise:  _nameOfExercise, programs:  _programs, nameOfProgram:  _nameOfProgram);
                               if (addOrNot) {
                                 _errorName = '';
                               } else {
-                                _errorName = 'Сначала сохраните программу';
+                                _errorName = S.of(context).FirstSaveTheProgram;
                               }
                               setState(() {});
                             },
@@ -130,7 +130,7 @@ class _UpdateProgramState extends State<UpdateProgram> {
                       itemCount: _exercises.length,
                       itemBuilder: (BuildContext context, int index) {
                         _exercises.sort((a, b) => a.name.toString().compareTo(b.name.toString()));
-                        return ExerciseTile(theExercise:  _exercises[index], addExerciseRepository: addExerciseRepositoryImpl, idOfProgram: theProgram.id,);
+                        return ExerciseTile(theExercise:  _exercises[index], idOfProgram: theProgram.id,);
                       },
 
                     ),

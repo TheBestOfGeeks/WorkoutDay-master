@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomFloatingActionButton extends StatefulWidget {
-  Widget widget;
-  String nameOfButton;
+  final Widget widget;
+  final String nameOfButton;
 
   @override
   State<CustomFloatingActionButton> createState() => _CustomFloatingActionButtonState(widget, nameOfButton);

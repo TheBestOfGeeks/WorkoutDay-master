@@ -1,14 +1,16 @@
 
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workoutday/core/data/repository/add_gymnastic_repository_impl.dart';
 import 'package:workoutday/core/domain/entities/entities/the_exercise.dart';
 import 'package:workoutday/core/domain/entities/entities/the_workout.dart';
 import 'package:workoutday/core/domain/use_cases/add_gymnastic_usecase.dart';
+import 'package:workoutday/generated/l10n.dart';
 
 class AddTraining extends StatefulWidget {
-  TheWorkout _theWorkout;
+  final TheWorkout _theWorkout;
 
   AddTraining(this._theWorkout);
 
@@ -27,7 +29,7 @@ class AddTrainingState extends State<AddTraining> {
   AddTrainingState(this._theWorkout);
 
   int _index = 0;
-  String _nameOfExercise = 'Error name';
+  String _nameOfExercise = '';
   late FixedExtentScrollController _scrollController;
 
   @override
@@ -66,14 +68,17 @@ class AddTrainingState extends State<AddTraining> {
                      _index = index;
                      setState(() {});
                    },
-                   children: _exercises.length > 0 ?  _exercises.map((item) => Center(child: Text(item.name.toString()),)).toList() : [Text('Не добавлено ни одной тренировки')],
+                   children: _exercises.length > 0 ?  _exercises.map((item) => Center(child: Text(item.name.toString()),)).toList() : [Text(S.of(context).NoOneTrainingIsFound)],
                  ),
                ),
-               CupertinoButton(onPressed: () {
+               CupertinoButton(
+                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                 color: Colors.blue,
+                 onPressed: () {
                  _nameOfExercise = _exercises.elementAt(_index).name;
-                 addGymnasticUseCase.saveGymnastic(_theWorkout.id, _nameOfExercise);
+                 addGymnasticUseCase.saveGymnastic(workoutId:  _theWorkout.id,gymnasticName:  _nameOfExercise);
                },
-                 child: Text('Добавить'),
+                 child: Text(S.of(context).Add),
                )
              ],
            ),

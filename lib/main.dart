@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
+import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfSet.dart';
 import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfWorkout.dart';
 import 'package:workoutday/core/presentation/navigation_bar_page.dart';
 import '/generated/l10n.dart';
@@ -55,6 +56,9 @@ class MainScreen extends StatelessWidget {
             create: (context) => ChangeNotifierGrabIdOfProgram()),
         ChangeNotifierProvider<ChangeNotifierHideFloatingButton>(
             create: (context) => ChangeNotifierHideFloatingButton()),
+        ChangeNotifierProvider<ChangeNotifierGrabIdOfGymnastic>(
+          create: (context) => ChangeNotifierGrabIdOfGymnastic(),
+        )
       ], child: NavigationBar());
     }
   }

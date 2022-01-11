@@ -1,17 +1,24 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
+import 'package:workoutday/core/data/repository/add_gymnastic_repository_impl.dart';
+import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfSet.dart';
 import 'package:workoutday/core/domain/change_notifiers/change_notifier_hideFloatingButton.dart';
 import 'package:workoutday/core/domain/entities/entities/the_gymnastic.dart';
+import 'package:workoutday/core/domain/entities/entities/the_workout.dart';
+import 'package:workoutday/core/domain/use_cases/add_gymnastic_usecase.dart';
 import 'package:workoutday/core/presentation/training_page/update_training.dart';
+
+AddGymnasticRepositoryImpl addGymnasticRepositoryImpl = AddGymnasticRepositoryImpl();
 
 class TrainingTale extends StatelessWidget {
 
-  TheGymnastic gymnastic;
+  final TheGymnastic gymnastic;
+  final TheWorkout workout;
 
-  TrainingTale(this.gymnastic);
+  TrainingTale(this.gymnastic, this.workout);
+
+  final addGymnasticUseCase =  AddGymnasticUseCase(addGymnasticRepositoryImpl);
 
 
 
@@ -28,7 +35,6 @@ class TrainingTale extends StatelessWidget {
     }
 
 
-
     return Padding(
         padding: EdgeInsets.only(top: 8.0),
         child: Card(
@@ -37,6 +43,7 @@ class TrainingTale extends StatelessWidget {
           margin: EdgeInsets.fromLTRB(20.0, 1.0, 20.0, 0.0),
           child: ListTile(
             onTap: ((){
+              context.read<ChangeNotifierGrabIdOfGymnastic>().changeIdOfGymnastic(gymnastic.id);
               context.read<ChangeNotifierHideFloatingButton>().isFloatingButtonHide(true);
               _programSettingPanel();
             }) ,
@@ -44,8 +51,7 @@ class TrainingTale extends StatelessWidget {
               radius: 15.0,
             ),
             title: Text(gymnastic.name),
-            subtitle: Text(''),
-            trailing: IconButton(icon: Icon(Icons.delete, color: Colors.red,), onPressed: (){},),
+            trailing: IconButton(icon: Icon(Icons.delete, color: Colors.red,), onPressed: (){ addGymnasticUseCase.deleteGymnastic(workoutId:  workout.id,idOfGymnastic:  gymnastic.id);  },),
           ),
 
         )

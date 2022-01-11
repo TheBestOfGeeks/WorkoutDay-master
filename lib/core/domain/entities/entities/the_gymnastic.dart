@@ -4,5 +4,7 @@
 class TheGymnastic {
 
   final String name;
-  TheGymnastic({ required this.name});
+  final String id;
+
+  TheGymnastic({ required this.name, required this.id});
 }

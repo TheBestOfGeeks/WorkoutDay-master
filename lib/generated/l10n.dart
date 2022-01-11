@@ -60,26 +60,6 @@ class S {
     );
   }
 
-  /// `Programs`
-  String get Programs {
-    return Intl.message(
-      'Programs',
-      name: 'Programs',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Settings`
-  String get Settings {
-    return Intl.message(
-      'Settings',
-      name: 'Settings',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Регистрация`
   String get AppBarRegistrationText {
     return Intl.message(
@@ -141,10 +121,10 @@ class S {
   }
 
   /// `Придумайте логин для входа`
-  String get LoginRegistratuonHintText {
+  String get LoginRegistrationHintText {
     return Intl.message(
       'Придумайте логин для входа',
-      name: 'LoginRegistratuonHintText',
+      name: 'LoginRegistrationHintText',
       desc: '',
       args: [],
     );
@@ -170,10 +150,10 @@ class S {
     );
   }
 
-  /// `Введите пароль`
+  /// `Введите Пароль`
   String get PasswordHintText {
     return Intl.message(
-      'Введите пароль',
+      'Введите Пароль',
       name: 'PasswordHintText',
       desc: '',
       args: [],
@@ -225,6 +205,246 @@ class S {
     return Intl.message(
       'Добавление новой программы',
       name: 'AddNameOfProgramHint',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Авторизация`
+  String get Authorization {
+    return Intl.message(
+      'Авторизация',
+      name: 'Authorization',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Неверный логин или пароль`
+  String get ErrorLoginOrPassword {
+    return Intl.message(
+      'Неверный логин или пароль',
+      name: 'ErrorLoginOrPassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Войти анонимно`
+  String get AnonEnter {
+    return Intl.message(
+      'Войти анонимно',
+      name: 'AnonEnter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Проверьте правильность введённых данных`
+  String get CheckIfTheInputDataIsRight {
+    return Intl.message(
+      'Проверьте правильность введённых данных',
+      name: 'CheckIfTheInputDataIsRight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Введите имя программы`
+  String get EnterProgramName {
+    return Intl.message(
+      'Введите имя программы',
+      name: 'EnterProgramName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Имя программы`
+  String get ProgramName {
+    return Intl.message(
+      'Имя программы',
+      name: 'ProgramName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Программа с таким именем уже существует`
+  String get NameOfProgramExist {
+    return Intl.message(
+      'Программа с таким именем уже существует',
+      name: 'NameOfProgramExist',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сохранить программу`
+  String get SaveProgram {
+    return Intl.message(
+      'Сохранить программу',
+      name: 'SaveProgram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Программы тренировок`
+  String get Programs {
+    return Intl.message(
+      'Программы тренировок',
+      name: 'Programs',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить программу`
+  String get AddProgram {
+    return Intl.message(
+      'Добавить программу',
+      name: 'AddProgram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Упражнение`
+  String get Exercise {
+    return Intl.message(
+      'Упражнение',
+      name: 'Exercise',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Название упражнения`
+  String get NameOfExercise {
+    return Intl.message(
+      'Название упражнения',
+      name: 'NameOfExercise',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Сначала сохраните программу`
+  String get FirstSaveTheProgram {
+    return Intl.message(
+      'Сначала сохраните программу',
+      name: 'FirstSaveTheProgram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Настройки`
+  String get Settings {
+    return Intl.message(
+      'Настройки',
+      name: 'Settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Выйти`
+  String get Exit {
+    return Intl.message(
+      'Выйти',
+      name: 'Exit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Не добавлено ни одной тренировки`
+  String get NoOneTrainingIsFound {
+    return Intl.message(
+      'Не добавлено ни одной тренировки',
+      name: 'NoOneTrainingIsFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить`
+  String get Add {
+    return Intl.message(
+      'Добавить',
+      name: 'Add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Вес`
+  String get Weight {
+    return Intl.message(
+      'Вес',
+      name: 'Weight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Повторы`
+  String get Repetitions {
+    return Intl.message(
+      'Повторы',
+      name: 'Repetitions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Добавить упражнение`
+  String get AddExercise {
+    return Intl.message(
+      'Добавить упражнение',
+      name: 'AddExercise',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Заполните вес!`
+  String get AddWeight {
+    return Intl.message(
+      'Заполните вес!',
+      name: 'AddWeight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Заполните повторения!`
+  String get AddRepetitions {
+    return Intl.message(
+      'Заполните повторения!',
+      name: 'AddRepetitions',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Начать тренировку`
+  String get StartTraining {
+    return Intl.message(
+      'Начать тренировку',
+      name: 'StartTraining',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Тренировки`
+  String get Trainings {
+    return Intl.message(
+      'Тренировки',
+      name: 'Trainings',
       desc: '',
       args: [],
     );

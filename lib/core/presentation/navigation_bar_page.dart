@@ -3,8 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfProgram.dart';
+import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfSet.dart';
 import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfWorkout.dart';
 import 'package:workoutday/core/domain/entities/entities/the_gymnastic.dart';
+import 'package:workoutday/core/domain/entities/entities/the_set.dart';
 import '../data/firestore_service.dart';
 import '../domain/entities/entities/the_exercise.dart';
 import '../domain/entities/entities/the_program.dart';
@@ -44,13 +46,14 @@ class _NavigationBarState extends State<NavigationBar> {
   Widget build(BuildContext context) {
 
 
-    // Мультипровайдер позволяет создать несколько провайдеров слушающих иизменения в бд
+    // Мультипровайдер позволяет создать несколько провайдеров слушающих изменения в бд
     return MultiProvider(
       providers: [
-        StreamProvider<List<TheProgram>?>(create: (_) => DatabaseService().programs, initialData: null, lazy: false,),
-        StreamProvider<List<TheWorkout>?>(create: (_) => DatabaseService().workouts, initialData: null, lazy: false,),
-        StreamProvider<List<TheExercise>?>.value(value: DatabaseService.programs(programId: context.watch<ChangeNotifierGrabIdOfProgram>().getData).exercises, initialData: null, lazy: false,),
-    StreamProvider<List<TheGymnastic>?>.value(value: DatabaseService.workouts(workoutId:  context.watch<ChangeNotifierGrabIdOfWorkout>().getData).gymnastic, initialData: null, lazy: false,),
+        StreamProvider<List<TheProgram>?>(create: (_) => DatabaseService.empty().programs, initialData: null, lazy: false,),
+        StreamProvider<List<TheWorkout>?>(create: (_) => DatabaseService.empty().workouts, initialData: null, lazy: false,),
+        StreamProvider<List<TheExercise>?>.value(value: DatabaseService.exercises(programId: context.watch<ChangeNotifierGrabIdOfProgram>().getData).exercises, initialData: null, lazy: false,),
+    StreamProvider<List<TheGymnastic>?>.value(value: DatabaseService.gymnastics(workoutId:  context.watch<ChangeNotifierGrabIdOfWorkout>().getData).gymnastic, initialData: null, lazy: false,),
+        StreamProvider<List<TheSet>?>.value(value: DatabaseService.sets(workoutId: context.watch<ChangeNotifierGrabIdOfWorkout>().getData, gymnasticId: context.watch<ChangeNotifierGrabIdOfGymnastic>().getData ).sets, initialData: null, lazy: false,),
       ],
      child: Scaffold(
        bottomNavigationBar: CurvedNavigationBar(

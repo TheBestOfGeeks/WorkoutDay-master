@@ -2,18 +2,19 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:workoutday/core/data/repository/add_exercise_repository_impl.dart';
 import 'package:workoutday/core/domain/entities/entities/the_exercise.dart';
-import 'package:workoutday/core/domain/repository/add_exercise_repository.dart';
+import 'package:workoutday/core/domain/use_cases/add_exercise_usecase.dart';
 
-
+ AddExerciseRepositoryImpl addExerciseRepositoryImpl = AddExerciseRepositoryImpl();
 
 class ExerciseTile extends StatelessWidget {
 
   final TheExercise theExercise;
-  final AddExerciseRepository addExerciseRepository;
   final String idOfProgram;
+  final addExerciseUseCase = AddExerciseUseCase(addExerciseRepositoryImpl);
 
-  ExerciseTile({required this.theExercise, required this.addExerciseRepository, required this.idOfProgram});
+  ExerciseTile({required this.theExercise, required this.idOfProgram});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,8 @@ class ExerciseTile extends StatelessWidget {
               leading: CircleAvatar(
                 radius: 20.0,
               ),
-              title: Text(theExercise.name as String),
-              trailing: IconButton(icon: Icon(Icons.delete, color: Colors.red,), onPressed: () { addExerciseRepository.delete(theExercise.id, idOfProgram); },),
+              title: Text(theExercise.name),
+              trailing: IconButton(icon: Icon(Icons.delete, color: Colors.red,), onPressed: () {  addExerciseUseCase.deleteExercise(idOfExercise: theExercise.id, idOfProgram: idOfProgram); },),
             )
         )
     );

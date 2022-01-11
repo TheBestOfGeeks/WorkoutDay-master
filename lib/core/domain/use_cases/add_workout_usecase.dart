@@ -5,11 +5,11 @@ class AddWorkoutUsecase {
 
   AddWorkoutUsecase(this._addWorkoutRepository);
 
-  saveWorkout(nameOfWorkout, dateOfWorkout, isDone) {
-    _addWorkoutRepository.save(nameOfWorkout, dateOfWorkout, isDone);
+  saveWorkout({required String nameOfWorkout,required dateOfWorkout,required bool isDone,required String idOfParentProgram}) {
+    _addWorkoutRepository.save(nameOfWorkout, dateOfWorkout, isDone, idOfParentProgram);
   }
 
-  getNameOfWorkout() {
-
+  deleteWorkout(idOfWorkout) {
+    _addWorkoutRepository.delete(idOfWorkout);
   }
 }

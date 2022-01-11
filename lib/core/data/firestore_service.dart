@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:workoutday/core/domain/entities/entities/the_exercise.dart';
 import 'package:workoutday/core/domain/entities/entities/the_gymnastic.dart';
 import 'package:workoutday/core/domain/entities/entities/the_program.dart';
+import 'package:workoutday/core/domain/entities/entities/the_set.dart';
 import 'package:workoutday/core/domain/entities/entities/the_workout.dart';
 
 
@@ -12,38 +13,53 @@ class DatabaseService {
   String uid = '';
   String programId = '';
   String workoutId = '';
+  String gymnasticId = '';
+  String setId = '';
 
+  // обращение к коллекции users
   final CollectionReference _userCollection = FirebaseFirestore.instance.collection('userData');
+  // обращение к коллекции programs
   final CollectionReference _programsCollection = FirebaseFirestore.instance.collection('userData').doc(_auth.currentUser!.uid.toString()).collection('programs');
+  // обращение к коллекции workouts
   final CollectionReference _workoutCollection = FirebaseFirestore.instance.collection('userData').doc(_auth.currentUser!.uid.toString()).collection('workouts');
+  // обращение к коллекции exercises
         CollectionReference exercisesCollection(){
     final CollectionReference _exercisesCollection = FirebaseFirestore.instance.collection('userData').doc(_auth.currentUser!.uid.toString()).collection('programs')
         .doc(programId).collection('exercises');
-    return _exercisesCollection;
-  }
+    return _exercisesCollection;}
+  // обращение к коллекции gymnastics
    CollectionReference gymnasticCollection(){
-    final CollectionReference _gymnasticCollection = FirebaseFirestore.instance.collection('userData').doc(_auth.currentUser!.uid.toString()).collection('workouts')
-        .doc(workoutId).collection('gymnastics');
-    return _gymnasticCollection;
+    final CollectionReference _gymnasticCollection = _workoutCollection.doc(workoutId).collection('gymnastics');
+    return _gymnasticCollection;}
+// обращение к коллекции sets
+  CollectionReference setsCollection() {
+    final CollectionReference _setsCollection =   gymnasticCollection().doc(gymnasticId).collection('sets');
+    return _setsCollection;
   }
 
-
-  DatabaseService();
+  DatabaseService.empty();
 // Конструктор принимающий uid пользователя для авторизации
   DatabaseService.user({required this.uid});
-// Конструктор принимающий имя программы для метода exercisesCollection
-  DatabaseService.programs({required this.programId});
-// Конструктор принимающий имя программы для метода gymnasticCollection
-  DatabaseService.workouts({required this.workoutId});
+// Конструктор для методов exercises
+  DatabaseService.exercises({required this.programId});
+// Конструктор для методов gymnastic
+  DatabaseService.gymnastics({required this.workoutId});
+  // Конструктор для методов Collection
+  DatabaseService.sets({required this.workoutId, required this.gymnasticId});
 
 
-//------------------------------------------------------------
+//-------------------------USER-----------------------------------
 
-Future updateUserData(String userEmail) async {
+Future updateUserData({required String userEmail}) async {
   return await _userCollection.doc(uid).set({
     'userEmail': userEmail,
   });
 }
+
+//-------------------------PROGRAMS-----------------------------------
+
+
+
 // Возвращает из БД список программ
 List<TheProgram> listOfPrograms(QuerySnapshot snapshot) {
   return snapshot.docs.map((doc){
@@ -56,18 +72,18 @@ List<TheProgram> listOfPrograms(QuerySnapshot snapshot) {
         .map((listOfPrograms));
   }
 // Добавление программы в БД
-  Future addProgram(String nameOfProgram) async{
+  Future addProgram({required String nameOfProgram}) async{
     return await _programsCollection.doc().set({
       'name': nameOfProgram,
     });
   }
   // Удаление программы из БД
-  Future deleteProgram(String idOfProgram) async {
+  Future deleteProgram({required String idOfProgram}) async {
     return await _programsCollection.doc(idOfProgram).delete();
   }
 
 
-//-------------------------------------------------------------------------
+//----------------------------EXERCISES---------------------------------------------
 
 
 
@@ -87,7 +103,7 @@ List<TheProgram> listOfPrograms(QuerySnapshot snapshot) {
 
 
 // Добавление упражнения в БД
-  Future addExercise(String nameOfExercise) async {
+  Future addExercise({required String nameOfExercise}) async {
     return await exercisesCollection().doc().set(
       {
         'name': nameOfExercise,
@@ -95,31 +111,32 @@ List<TheProgram> listOfPrograms(QuerySnapshot snapshot) {
   }
 
   // Удаление упражнения в БД
-  Future deleteExercise(String idOfExercise) async{
+  Future deleteExercise({required String idOfExercise}) async{
     return await exercisesCollection().doc(idOfExercise).delete();
   }
 
 
 
-  //------------------------------------------------------------------
+  //--------------------------WORKOUTS----------------------------------------
 
 
 
 
 
   // Добавление тренировки в БД
-  Future addWorkout(nameOfWorkout, dateOfWorkout, bool isDone) async{
+  Future addWorkout({required nameOfWorkout,required dateOfWorkout,required bool isDone, required String idOfParentProgram}) async{
     return await _workoutCollection.doc().set({
       'name': nameOfWorkout,
       'date': dateOfWorkout,
       'isDone': isDone,
+      'idOfParentProgram': idOfParentProgram,
     });
   }
 
   // Возвращает из БД список тренировок
   List<TheWorkout> listOfWorkouts(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      return TheWorkout(id: doc.id, name: doc.get('name') ?? 'Error name', date: doc.get('date'), isDone: doc.get('isDone'));
+      return TheWorkout(id: doc.id, name: doc.get('name') ?? 'Error name', date: doc.get('date'), isDone: doc.get('isDone'), idOfParentProgram: doc.get('idOfParentProgram'));
     }).toList();
   }
 
@@ -129,29 +146,29 @@ List<TheProgram> listOfPrograms(QuerySnapshot snapshot) {
         .map((listOfWorkouts));
   }
   // Удаление тренировки из БД
-  Future deleteWorkout(String idOfWorkout) async {
-    return await _programsCollection.doc(idOfWorkout).delete();
+  Future deleteWorkout({required String idOfWorkout}) async {
+    return await _workoutCollection.doc(idOfWorkout).delete();
   }
 
 
-  //----------------------------------------------------------
+  //---------------------GYMNASTIC-------------------------------------
 
 
  // Добавление воркаут упражнения
-  Future addGymnastic(String name) async {
+  Future addGymnastic({required String name}) async {
     return await gymnasticCollection().doc().set(
         {'name': name
         });
   }
 // Добавление воркаут упражнения
-  Future deleteGymnastic(String idOfGymnastic) async {
+  Future deleteGymnastic({required String idOfGymnastic}) async {
     return await gymnasticCollection().doc(idOfGymnastic).delete();
   }
 
   // Возвращает из БД список тренировок
   List<TheGymnastic> listOfGymnastic(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
-      return TheGymnastic(name: doc.get('name') ?? 'Error name');
+      return TheGymnastic(name: doc.get('name') ?? 'Error name', id: doc.id);
     }).toList();
   }
 
@@ -159,6 +176,35 @@ List<TheProgram> listOfPrograms(QuerySnapshot snapshot) {
     return gymnasticCollection().snapshots()
         .map((listOfGymnastic));
   }
+
+
+
+//---------------------GYMNASTIC-------------------------------------
+
+
+// Добавление воркаут упражнения
+Future addSet({required int weight, required int repetition}) async {
+  return await setsCollection().doc().set(
+      {'weight': weight,
+        'repetition': repetition,
+      });
+}
+// Добавление воркаут упражнения
+Future deleteSet({required String idOfSet}) async {
+  return await setsCollection().doc(idOfSet).delete();
+}
+
+// Возвращает из БД список тренировок
+List<TheSet> listOfSets(QuerySnapshot snapshot) {
+  return snapshot.docs.map((doc) {
+    return TheSet(repetition: doc.get('repetition'),weight: doc.get('weight') , id: doc.id);
+  }).toList();
+}
+
+Stream<List<TheSet>> get sets {
+  return setsCollection().snapshots()
+      .map((listOfSets));
+}
 
 }
 

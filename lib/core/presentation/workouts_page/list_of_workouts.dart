@@ -23,7 +23,7 @@ class ListOfWorkoutsState extends State<ListOfWorkouts> {
   @override
   Widget build(BuildContext context) {
 
-    final _workouts  = Provider.of<List<TheWorkout>?>(context) ?? [];
+    final _workouts = Provider.of<List<TheWorkout>?>(context) ?? [];
     return
       AnimationLimiter(
         child: ListView.builder(

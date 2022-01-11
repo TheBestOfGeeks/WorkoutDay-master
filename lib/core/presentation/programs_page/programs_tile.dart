@@ -16,7 +16,7 @@ class ProgramTile extends StatelessWidget {
 
   final TheProgram theProgram;
   ProgramTile(this.theProgram);
-  AddProgramUseCase saveProgram = AddProgramUseCase(addProgramRepositoryImpl);
+  final AddProgramUseCase saveProgram = AddProgramUseCase(addProgramRepositoryImpl);
 
 
 
@@ -48,7 +48,7 @@ class ProgramTile extends StatelessWidget {
               leading: CircleAvatar(
                 radius: 15.0,
               ),
-              title: Text(theProgram.name as String),
+              title: Text(theProgram.name),
               trailing: IconButton(icon: Icon(Icons.delete, color: Colors.red,), onPressed: (){ saveProgram.deleteDocument(theProgram.id); },),
             ),
 

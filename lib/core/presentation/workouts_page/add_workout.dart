@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:workoutday/core/data/repository/add_workout_repository_impl.dart';
 import 'package:workoutday/core/domain/entities/entities/the_program.dart';
 import 'package:workoutday/core/domain/use_cases/add_workout_usecase.dart';
+import 'package:workoutday/generated/l10n.dart';
 
 
 
@@ -27,8 +28,9 @@ class AddWorkoutState extends State<AddWorkout> {
   final _initialDate = DateTime.now();
   int _index = 0;
   late FixedExtentScrollController _scrollController;
-  String _nameOfWorkout = 'null error';
+  String _nameOfWorkout = '';
   bool _WorkoutIsDone = false;
+  late String _idOfParentProgram;
 
   @override
   void initState() {
@@ -47,6 +49,7 @@ class AddWorkoutState extends State<AddWorkout> {
 
     final _programs = Provider.of<List<TheProgram>>(context);
     _nameOfWorkout = _programs.elementAt(_index).name;
+    _idOfParentProgram = _programs.elementAt(_index).id;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -81,9 +84,10 @@ class AddWorkoutState extends State<AddWorkout> {
                      child: Text(DateFormat('dd.MM.yyyy').format(_initialDate), style: TextStyle(fontSize: 20, color: Colors.black),),
                    style: TextButton.styleFrom(side: BorderSide(color: Colors.grey), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
                  ),
-                  CupertinoButton(child: Text('Начать тренировку'), borderRadius: BorderRadius.all(Radius.circular(20)),
+                  SizedBox(height: 20,),
+                  CupertinoButton(child: Text(S.of(context).StartTraining),color: Colors.blue, borderRadius: BorderRadius.all(Radius.circular(20)),
                     onPressed: (){
-                      _workoutUsecase.saveWorkout(_nameOfWorkout, _initialDate, _WorkoutIsDone);
+                      _workoutUsecase.saveWorkout(nameOfWorkout: _nameOfWorkout,dateOfWorkout:  _initialDate,isDone:  _WorkoutIsDone, idOfParentProgram: _idOfParentProgram);
                       }, ),
                   ]
                 )

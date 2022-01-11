@@ -8,6 +8,7 @@ import 'package:workoutday/core/domain/entities/entities/the_gymnastic.dart';
 import 'package:workoutday/core/domain/entities/entities/the_workout.dart';
 import 'package:workoutday/core/presentation/features/custom_floating_action_button.dart';
 import 'package:workoutday/core/presentation/training_page/training_tale.dart';
+import 'package:workoutday/generated/l10n.dart';
 
 import 'add_training.dart';
 
@@ -31,9 +32,11 @@ class TrainingPageState extends State<TrainingPage> {
 
   @override
   Widget build(BuildContext context) {
+
     bool _hideFloatingButton = context.watch<ChangeNotifierHideFloatingButton>().getHideOrNotButton;
-    var _time = DateFormat('yMMMMEEEEd').format(_theWorkout.date.toDate());
+    var _time = DateFormat.yMMMMEEEEd('RU-ru').format(_theWorkout.date.toDate());
 final _gymnastics = Provider.of<List<TheGymnastic>>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('''${_theWorkout.name}
@@ -54,7 +57,7 @@ final _gymnastics = Provider.of<List<TheGymnastic>>(context);
                   curve: Curves.fastLinearToSlowEaseIn,
                   horizontalOffset: -300,
                   verticalOffset: -850,
-                  child: TrainingTale(_gymnastics[index]),
+                  child: TrainingTale(_gymnastics[index], _theWorkout),
                 ),
               ),
             );
@@ -62,7 +65,7 @@ final _gymnastics = Provider.of<List<TheGymnastic>>(context);
           itemCount: _gymnastics.length,
           ),
       ),
-      floatingActionButton: _hideFloatingButton ? Container() : CustomFloatingActionButton(AddTraining(_theWorkout), 'Добавить упражнение'),
+      floatingActionButton: _hideFloatingButton ? Container() : CustomFloatingActionButton(AddTraining(_theWorkout), S.of(context).AddExercise),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
     );

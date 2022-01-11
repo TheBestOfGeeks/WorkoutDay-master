@@ -1,15 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/src/provider.dart';
+import 'package:workoutday/core/data/repository/add_set_repository_impl.dart';
+import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfWorkout.dart';
 import 'package:workoutday/core/domain/change_notifiers/change_notifier_hideFloatingButton.dart';
 import 'package:workoutday/core/domain/entities/entities/the_gymnastic.dart';
+import 'package:workoutday/core/domain/entities/entities/the_set.dart';
+import 'package:workoutday/core/domain/use_cases/add_set_usecase.dart';
 import 'package:workoutday/core/presentation/features/text_field_style.dart';
 import 'package:workoutday/core/presentation/training_page/sets_tile.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:workoutday/generated/l10n.dart';
 
 class UpdateTraining extends StatefulWidget {
 
-  TheGymnastic gymnastic;
+ final  TheGymnastic gymnastic;
 
   UpdateTraining(this.gymnastic);
   @override
@@ -18,15 +23,24 @@ class UpdateTraining extends StatefulWidget {
   }
 }
 
+AddSetRepositoryImpl _addSetRepositoryImpl = AddSetRepositoryImpl();
+
 class UpdateTrainingState extends State<UpdateTraining> {
 
   TheGymnastic gymnastic;
-
   UpdateTrainingState(this.gymnastic);
+
+  final _formKey = GlobalKey<FormState>();
+
+  final _addSetUseCase = AddSetUseCase(_addSetRepositoryImpl);
+  int _weight = 0;
+  int _repetition = 0;
 
   @override
   Widget build(BuildContext context) {
 
+    final _idOfWorkout = context.watch<ChangeNotifierGrabIdOfWorkout>().getData;
+    final _sets = context.watch<List<TheSet>>();
 
     return GestureDetector(
       onTap: () {
@@ -51,10 +65,11 @@ class UpdateTrainingState extends State<UpdateTraining> {
               decoration: const BoxDecoration(
                 borderRadius: BorderRadius.vertical(
                     top: Radius.circular(40), bottom: Radius.circular(40)),
-                color: Color.fromRGBO(238, 238, 238, 1),
+                color: Color.fromRGBO(238,238,238, 1),
               ),
               padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
               child: Form(
+                key: _formKey,
                 child: ListView(
                   physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
                   children: [
@@ -64,32 +79,39 @@ class UpdateTrainingState extends State<UpdateTraining> {
                       children: [
                             Expanded(
                                 flex: 2,
-                                child: TextField(
+                                child: TextFormField(
+                                  validator: (val) => val!.isEmpty ? S.of(context).AddWeight: null,
+                                  onChanged: (weight) => _weight = int.parse(weight),
                                   maxLength: 3,
                                   keyboardType: TextInputType.number,
-                                  decoration: TextFieldStyle('Вес', 'Кг', Icon(Icons.addchart)).style(),)),
+                                  decoration: TextFieldStyle(S.of(context).Weight, '', Icon(Icons.addchart)).style(),)),
                         Expanded(
                             flex: 1,
-                            child: IconButton(onPressed: (){}, icon: Icon(Icons.add_circle_rounded, size: 50,))),
+                            child: IconButton(onPressed: (){
+                              if (_formKey.currentState!.validate()) {
+                                _addSetUseCase.addSet(weight: _weight, repetition: _repetition, gymnasticId: gymnastic.id, idOfWorkout: _idOfWorkout);
+                              }
+                            }, icon: Icon(Icons.add_circle_rounded, size: 50,))),
                         Expanded(
                             flex: 2,
-                            child: TextField(
+                            child: TextFormField(
+                              validator: (val) => val!.isEmpty ? S.of(context).AddRepetitions: null,
+                              onChanged: (repetition) => _repetition = int.parse(repetition),
                               maxLength: 4,
                               keyboardType: TextInputType.number,
-                              decoration: TextFieldStyle('Повторы', '', Icon(Icons.article_outlined)).style(),)),
+                              decoration: TextFieldStyle(S.of(context).Repetitions, '', Icon(Icons.article_outlined)).style(),)),
                       ]
                     ),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 30,),
                     AnimationLimiter(
                       child: Container(
                         height: 400,
                         child: ListView.builder(
                           physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-                          itemCount: 10,
+                          itemCount: _sets.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return SetsTile();
+                            return SetsTile(_sets[index]);
                           },
-
                         ),
                       ),
                     ),

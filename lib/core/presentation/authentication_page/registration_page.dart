@@ -116,7 +116,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                     // Кнопка регистрации
                     CupertinoButton(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.black,
+                      color: Colors.blue,
                       child: Text(S.of(context).RegistrationBTN),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
@@ -124,8 +124,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                               .registrationByEmailAndPassword(email, password);
                           if (result == null) {
                             setState(() {
-                              registrationError =
-                                  'Проверьте правильность введённых данных';
+                              registrationError = S.of(context).CheckIfTheInputDataIsRight;
                             });
                           } else {
                             ////
@@ -137,7 +136,7 @@ class RegistrationPageState extends State<RegistrationPage> {
                     // Кнопка назад
                     CupertinoButton(
                       borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      color: Colors.black,
+                      color: Colors.blue,
                       child: Text(S.of(context).BackBTN),
                       onPressed: () => {
                         Navigator.pop(context),

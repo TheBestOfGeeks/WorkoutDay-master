@@ -5,14 +5,14 @@ class AddExerciseUseCase {
 
   AddExerciseUseCase(this.addExerciseRepository);
 
-  bool addExercise(_nameOfExercise, _programs, _nameOfProgram) {
+  bool addExercise({nameOfExercise, programs, nameOfProgram}) {
     bool _saveOrNotExercise = false;
     String _idOfProgram = '';
-    for (var exOfProgram in _programs) {
-      if (exOfProgram.name == _nameOfProgram) {
+    for (var exOfProgram in programs) {
+      if (exOfProgram.name == nameOfProgram) {
         _idOfProgram = exOfProgram.id!;
         addExerciseRepository.save(
-          _nameOfExercise,
+          nameOfExercise,
           _idOfProgram,
         );
         _saveOrNotExercise = true;
@@ -23,7 +23,7 @@ class AddExerciseUseCase {
     return _saveOrNotExercise;
   }
 
-  deleteExercise(_idOfExercise, _idOfProgram) {
-    addExerciseRepository.delete(_idOfExercise, _idOfProgram);
+  deleteExercise({idOfExercise, idOfProgram}) {
+    addExerciseRepository.delete(idOfExercise, idOfProgram);
   }
 }

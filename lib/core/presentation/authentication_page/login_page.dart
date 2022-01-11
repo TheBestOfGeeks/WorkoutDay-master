@@ -49,7 +49,7 @@ class LoginPageState extends State<LoginPage> {
     return _loadingAnimation ? Loading() : Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: (Text(S.of(context).AppBarRegistrationText)),
+          title: (Text(S.of(context).Authorization)),
           centerTitle: true,
         ),
         body: Form(
@@ -98,7 +98,7 @@ class LoginPageState extends State<LoginPage> {
                 children: [
                   CupertinoButton(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    color: Colors.black,
+                    color: Colors.blue,
                     child: Text(
                       S.of(context).LogInBTN,
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -110,7 +110,7 @@ class LoginPageState extends State<LoginPage> {
                         if (result == null){
                           setState(() {
                             _loadingAnimation = false;
-                            _loginError = 'Неверный логин или пароль';
+                            _loginError = S.of(context).ErrorLoginOrPassword;
                           });
                         }
                       }
@@ -119,7 +119,7 @@ class LoginPageState extends State<LoginPage> {
                   //Кнопка регистрации
                   CupertinoButton(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    color: Colors.black,
+                    color: Colors.blue,
                     child: Text(S.of(context).RegistrationBTN),
                     onPressed: () => {
                       Navigator.push(
@@ -131,16 +131,10 @@ class LoginPageState extends State<LoginPage> {
                   //Кнопка войти анонимно
                   CupertinoButton(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                      child: Text("Войти анонимно"),
-                      color: Colors.black,
+                      child: Text(S.of(context).AnonEnter),
+                      color: Colors.blue,
                       onPressed: (() async {
-                       dynamic result = await _auth.singInAnon();
-                       if (result == null){
-                         print ('ошибка авторизации');
-                       } else {
-                         print ('Успешный вход');
-                         print (result.uid);
-                       }
+                       await _auth.singInAnon();
                       })),
                 ],
               )

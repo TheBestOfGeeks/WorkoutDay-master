@@ -1,8 +1,9 @@
 
 
 class TheSet {
+  final String id;
   final int weight;
-  final int repetitions;
+  final int repetition;
 
-  TheSet(this.weight, this.repetitions);
+  TheSet({required this.weight,required this.repetition,required this.id});
 }

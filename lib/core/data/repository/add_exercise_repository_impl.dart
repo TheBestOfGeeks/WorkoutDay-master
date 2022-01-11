@@ -11,14 +11,14 @@ class AddExerciseRepositoryImpl implements AddExerciseRepository {
 
   @override
   save(_nameOfExercise, idOfProgram ) {
-    DatabaseService databaseServiceForAddExercise = DatabaseService.programs(programId: idOfProgram);
-    databaseServiceForAddExercise.addExercise(_nameOfExercise);
+    DatabaseService databaseServiceForAddExercise = DatabaseService.exercises(programId: idOfProgram);
+    databaseServiceForAddExercise.addExercise(nameOfExercise: _nameOfExercise);
   }
 
   @override
   delete(_idOfExercise, _programId) {
-    DatabaseService databaseServiceForDeleteExercise = DatabaseService.programs(programId: _programId);
-    databaseServiceForDeleteExercise.deleteExercise(_idOfExercise);
+    DatabaseService databaseServiceForDeleteExercise = DatabaseService.exercises(programId: _programId);
+    databaseServiceForDeleteExercise.deleteExercise(idOfExercise: _idOfExercise);
   }
 
 

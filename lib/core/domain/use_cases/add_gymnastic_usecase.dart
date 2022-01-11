@@ -7,12 +7,12 @@ class AddGymnasticUseCase {
 
   AddGymnasticUseCase(this.addGymnasticRepository);
 
-  saveGymnastic(workoutId, gymnasticName) {
+  saveGymnastic({workoutId, gymnasticName}) {
     addGymnasticRepository.save(workoutId, gymnasticName);
   }
 
 
-  deleteGymnastic(workoutId, idOfGymnastic) {
+  deleteGymnastic({workoutId, idOfGymnastic}) {
     addGymnasticRepository.delete(workoutId, idOfGymnastic);
   }
 }
