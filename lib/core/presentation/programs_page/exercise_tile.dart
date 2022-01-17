@@ -27,6 +27,8 @@ class ExerciseTile extends StatelessWidget {
               visualDensity: VisualDensity.compact,
               dense: true,
               leading: CircleAvatar(
+                backgroundColor: Color.fromRGBO(238,238,238, 1),
+                backgroundImage: AssetImage('lib/assets/images/dd.png'),
                 radius: 20.0,
               ),
               title: Text(theExercise.name),

@@ -19,14 +19,20 @@ class _ProgramsPageState extends State<ProgramsPage> {
   @override
   Widget build(BuildContext context) {
     bool _hideFloatingButton = context.watch<ChangeNotifierHideFloatingButton>().getHideOrNotButton;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(S.of(context).Programs),
-      ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: _hideFloatingButton ? Container() : CustomFloatingActionButton(AddProgram(), S.of(context).AddProgram) ,
-        body: ListOfPrograms(),
-      );
+    return WillPopScope(
+      onWillPop: () async {
+         context.read<ChangeNotifierHideFloatingButton>().isFloatingButtonHide(false);
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(S.of(context).Programs),
+        ),
+          floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: _hideFloatingButton ? Container() : CustomFloatingActionButton(AddProgram(), S.of(context).AddProgram) ,
+          body: ListOfPrograms(),
+        ),
+    );
 
   }
 }

@@ -37,37 +37,43 @@ class TrainingPageState extends State<TrainingPage> {
     var _time = DateFormat.yMMMMEEEEd('RU-ru').format(_theWorkout.date.toDate());
 final _gymnastics = Provider.of<List<TheGymnastic>>(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('''${_theWorkout.name}
-         ${_time}''', style: TextStyle(fontSize: 15),),
-        centerTitle: true,
-      ),
-      body: AnimationLimiter(
-        child: ListView.builder(
-          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-          itemBuilder: (context, index){
-           return AnimationConfiguration.staggeredList(
-              position: index,
-              duration: const Duration(milliseconds: 100),
-              child: SlideAnimation(
-                verticalOffset: 50.0,
+    return WillPopScope(
+      onWillPop: () async {
+        context.read<ChangeNotifierHideFloatingButton>().isFloatingButtonHide(false);
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('''${_theWorkout.name}
+           ${_time}''', style: TextStyle(fontSize: 15),),
+          centerTitle: true,
+        ),
+        body: AnimationLimiter(
+          child: ListView.builder(
+            physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+            itemBuilder: (context, index){
+             return AnimationConfiguration.staggeredList(
+                position: index,
+                duration: const Duration(milliseconds: 100),
                 child: SlideAnimation(
-                  duration: Duration(milliseconds: 800),
-                  curve: Curves.fastLinearToSlowEaseIn,
-                  horizontalOffset: -300,
-                  verticalOffset: -850,
-                  child: TrainingTale(_gymnastics[index], _theWorkout),
+                  verticalOffset: 50.0,
+                  child: SlideAnimation(
+                    duration: Duration(milliseconds: 800),
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    horizontalOffset: -300,
+                    verticalOffset: -850,
+                    child: TrainingTale(_gymnastics[index], _theWorkout),
+                  ),
                 ),
-              ),
-            );
-        },
-          itemCount: _gymnastics.length,
-          ),
-      ),
-      floatingActionButton: _hideFloatingButton ? Container() : CustomFloatingActionButton(AddTraining(_theWorkout), S.of(context).AddExercise),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+              );
+          },
+            itemCount: _gymnastics.length,
+            ),
+        ),
+        floatingActionButton: _hideFloatingButton ? Container() : CustomFloatingActionButton(AddTraining(_theWorkout), S.of(context).AddExercise),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
 
+      ),
     );
   }
 }

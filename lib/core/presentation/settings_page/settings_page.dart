@@ -16,22 +16,29 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(S.of(context).Settings),
       ),
-      body: Row(
-        verticalDirection: VerticalDirection.down,
-        crossAxisAlignment: CrossAxisAlignment.end,
+      body: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-              CupertinoButton(
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                  color: Colors.blue,
-                  child: Text(S.of(context).Exit),
-                  onPressed: (() async {
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                    CupertinoButton(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        color: Colors.red,
+                        child: Text(S.of(context).Exit),
+                        onPressed: (() async {
 await _auth.logOutUser();
-                  }
-                  )
-              ),
+                        }
+                        )
+                    ),
 
-          ]
+                ]
 
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -39,7 +39,9 @@ class WorkoutTale extends StatelessWidget {
                 Navigator.push(context, MaterialPageRoute(builder:(context) => TrainingPage(_theWorkout)));
               }) ,
               leading: CircleAvatar(
-                radius: 15.0,
+                backgroundColor: Color.fromRGBO(238,238,238, 1),
+                backgroundImage: AssetImage('lib/assets/images/dd.png'),
+                radius: 26.0,
               ),
               title: Text('$_name'),
               subtitle: Text('$_time'),

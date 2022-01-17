@@ -90,7 +90,7 @@ class LoginPageState extends State<LoginPage> {
                 decoration: TextFieldStyle(S.of(context).PasswordTextField, S.of(context).PasswordHintText, Icon(Icons.password), suffixIcon: _passIconButton()).style(),
               ),
               Text(_loginError,
-              style: TextStyle(color: Colors.red, fontSize: 18),),
+              style: TextStyle(color: Colors.redAccent, fontSize: 18),),
               // Кнопка Войти
               ButtonBar(
                 alignment: MainAxisAlignment.center,
@@ -98,7 +98,7 @@ class LoginPageState extends State<LoginPage> {
                 children: [
                   CupertinoButton(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    color: Colors.blue,
+                    color: Colors.red,
                     child: Text(
                       S.of(context).LogInBTN,
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -119,7 +119,7 @@ class LoginPageState extends State<LoginPage> {
                   //Кнопка регистрации
                   CupertinoButton(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    color: Colors.blue,
+                    color: Colors.redAccent,
                     child: Text(S.of(context).RegistrationBTN),
                     onPressed: () => {
                       Navigator.push(
@@ -132,7 +132,7 @@ class LoginPageState extends State<LoginPage> {
                   CupertinoButton(
                     borderRadius: BorderRadius.all(Radius.circular(20.0)),
                       child: Text(S.of(context).AnonEnter),
-                      color: Colors.blue,
+                      color: Colors.redAccent,
                       onPressed: (() async {
                        await _auth.singInAnon();
                       })),

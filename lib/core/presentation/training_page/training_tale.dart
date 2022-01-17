@@ -48,7 +48,9 @@ class TrainingTale extends StatelessWidget {
               _programSettingPanel();
             }) ,
             leading: CircleAvatar(
-              radius: 15.0,
+              backgroundColor: Color.fromRGBO(238,238,238, 1),
+              backgroundImage: AssetImage('lib/assets/images/dd.png'),
+              radius: 26.0,
             ),
             title: Text(gymnastic.name),
             trailing: IconButton(icon: Icon(Icons.delete, color: Colors.red,), onPressed: (){ addGymnasticUseCase.deleteGymnastic(workoutId:  workout.id,idOfGymnastic:  gymnastic.id);  },),
