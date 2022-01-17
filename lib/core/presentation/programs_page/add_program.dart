@@ -82,7 +82,7 @@ class _AddProgramState extends State<AddProgram> {
                     ),
               CupertinoButton(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                color: Colors.blue,
+                color: Colors.redAccent,
                 child: Text(S.of(context).SaveProgram,
                     style: TextStyle(fontSize: 13)),
                 onPressed: () => {
