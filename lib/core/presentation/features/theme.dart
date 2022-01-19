@@ -10,7 +10,7 @@ ThemeData basicTheme() {
 
 
   return ThemeData(
-    fontFamily: 'AmericanTypewriter',
+    fontFamily: 'RoundicoRegular',
 scaffoldBackgroundColor: Colors.white,
 cardColor: Color.fromRGBO(238,238,238, 1),
 
