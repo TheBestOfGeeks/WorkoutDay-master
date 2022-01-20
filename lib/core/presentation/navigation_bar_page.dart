@@ -18,12 +18,12 @@ import 'workouts_page/workouts_page.dart';
 
 
 
-class NavigationBar extends StatefulWidget {
+class CustomNavigationBar extends StatefulWidget {
   @override
-  State<NavigationBar> createState() => _NavigationBarState();
+  State<CustomNavigationBar> createState() => _NavigationBarState();
 }
 
-class _NavigationBarState extends State<NavigationBar> {
+class _NavigationBarState extends State<CustomNavigationBar> {
   int index = 0;
 
   final screens = [

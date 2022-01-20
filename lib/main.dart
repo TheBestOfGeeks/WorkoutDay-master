@@ -5,7 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfSet.dart';
 import 'package:workoutday/core/domain/change_notifiers/change_notifier_grabIdOfWorkout.dart';
-import 'package:workoutday/core/presentation/navigation_bar_page.dart';
 import '/generated/l10n.dart';
 import 'core/data/auth_service.dart';
 import 'core/domain/change_notifiers/change_notifier_grabIdOfProgram.dart';
@@ -13,6 +12,7 @@ import 'core/domain/change_notifiers/change_notifier_hideFloatingButton.dart';
 import 'core/domain/entities/the_user.dart';
 import 'core/presentation/authentication_page/login_page.dart';
 import 'core/presentation/features/theme.dart';
+import 'core/presentation/navigation_bar_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -59,7 +59,7 @@ class MainScreen extends StatelessWidget {
         ChangeNotifierProvider<ChangeNotifierGrabIdOfGymnastic>(
           create: (context) => ChangeNotifierGrabIdOfGymnastic(),
         )
-      ], child: NavigationBar());
+      ], child: CustomNavigationBar());
     }
   }
 }
